@@ -3,14 +3,15 @@ package com.mtech.imagevideoglide;
 import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
+import androidx.media3.exoplayer.ExoPlayer;
+import androidx.media3.common.MediaItem;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.media3.ui.PlayerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.exoplayer3.ExoPlayer;
-import com.google.android.exoplayer3.MediaItem;
-import com.google.android.exoplayer3.ui.PlayerView;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -27,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         imageView = findViewById(R.id.imageView);
-        videoThumbnail = findViewById(R.id.videoThumbnail);
         playerView = findViewById(R.id.playerView);
 
         String videoUrl = "https://videos.pexels.com/video-files/4114413/4114413-hd_1920_1080_25fps.mp4";
@@ -38,15 +38,8 @@ public class MainActivity extends AppCompatActivity {
                 .load(imageUrl)
                 .into(imageView);
 
-        // ভিডিও থাম্বনেইল তৈরি করা
-        Bitmap bitmap = getVideoThumbnail(videoUrl);
 
-        // Glide দিয়ে থাম্বনেইল লোড করা
-        if (bitmap != null) {
-            Glide.with(this)
-                    .load(bitmap)
-                    .into(videoThumbnail);
-        }
+
 
         // ExoPlayer তৈরি এবং ভিডিও প্লে করা
         exoPlayer = new ExoPlayer.Builder(this).build();
